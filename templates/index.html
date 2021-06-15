@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='header.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='body.css')}}">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.0/chart.min.js"></script>
+
+    <title>Homepage Sentiment Analysis</title>
+
+</head>
+<body>
+
+  <!-- Head  -->
+
+    <div class="header">
+      <div class="row">
+        <div class="text-center">
+          <img class="img" src="{{url_for('static', filename='paragon-logo.png')}}" alt="">
+          <a href="#default" class="logo">Sentiment PARAGONIU Sector</a>
+        </div>
+        <div class="text-center">
+          <div class="fyp-txt header-right">CS402 - Final Year Project</div>
+          <div class="header-right" > By: Porchhay Ngov & Sidaro Keo</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Body -->
+      
+      <div style="padding-top: 50px;" class="graph-part">
+        <div class="flex-column">
+          <div class="flex-row">
+            <div class="box-barChart" style="margin-right: 30px;"><canvas id="barChart"></canvas></div>
+            <div style="margin-left: 30px;"><canvas id="pieChart"></canvas></div>
+          </div>
+            <div class="box-StackedChart" ><canvas id="stackedChart"></canvas></div>
+        </div>
+      </div>
+</body>
+
+<!-- End of body -->
+
+<!-- Bar Chart -->
+
+<script>
+  // let barChart = document.getElementById('barChart').getContext('2d')
+
+  let barChartData = new Chart(barChart, {
+    type:'bar',
+    data:{
+      labels:['security', 'expensive', 'service', 'tuition', 'cheap', 'like', 'love'],
+      datasets:[{
+        data:[10,60,30,40,50,25,48,],
+        backgroundColor:[
+          'rgba(54, 162, 235, 0.6)'
+        ],
+        borderWidth: 4,
+        borderColor: '#777',
+        hoverBorderColor:'#000'
+      }]
+    },
+    options:{
+      plugins:{
+        title:{
+          display: true,
+          text: 'Word frequency by Sentiment'
+        },
+        legend:{
+          display:false,
+        }
+      },
+      scales: {
+        xAxes: [{
+          gridLines: {
+          display: false
+          }
+        }],
+        y: {
+          max: 6,
+          min: 0,
+        }
+      },
+      indexAxis:'y',
+      maintainAspectRatio:false,
+    },
+  
+  });
+</script>
+
+<!-- End Bar chart -------------------------------------------------------------------------- -->
+
+<!-- Pie Chart -->
+
+<script>
+
+let pieChartData = new Chart(pieChart, {
+  type: 'doughnut',
+  data: {
+  labels: [
+    'Negative',
+    'Neutral',
+    'Positive'
+  ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [{{negative_point}},{{Neutral_point}}, {{positive_point}}],
+    backgroundColor: [
+      'rgb(0, 0, 0)',
+      'rgb(128,128,128)',
+      'rgb(54, 162, 235)',
+    ],
+    hoverOffset: 4
+  }]
+  },
+  options:{
+    plugins:{
+        title:{
+          display: true,
+          text: 'Review Classification',
+          align: 'center',
+          padding:{
+            top: 10
+          }
+        },
+      },
+  }
+});
+
+</script>
+
+
+<!-- End Pie Chart ------------------------------------------   -->
+
+<!-- Stacked Chart -->
+
+<script>
+  let stackedChartData = new Chart(stackedChart, {
+    type: 'bar',
+    data: {
+      labels: ['Security', 'Service', 'Environment', 'Tuition', 'Canteen'], //[10,12,4,9] //{{pos_category | tojson}}
+      datasets: [{
+        label: ['Positive'],
+        data: {{pos_category | tojson}},
+        backgroundColor:[
+          'rgb(37,246,30)',
+          'rgb(37,246,30)',
+          'rgb(37,246,30)',
+        ],
+        borderWidth: 3,
+        borderRadius: 5,
+        borderColor: '#777',
+        hoverBorderColor:'#000' 
+      },{
+        label: ['neutral'],
+        data: {{neut_category | tojson}}, // {{neut_category | tojson}}
+        backgroundColor:[
+          'rgb(255,255,51)',
+          'rgb(255,255,51)',
+          'rgb(255,255,51)',
+        ],
+        borderWidth: 3,
+        borderRadius: 5,
+        borderColor: '#777',
+        hoverBorderColor:'#000'
+      },{
+        label: ['Negative'], 
+        data: {{neg_category | tojson}}, //{{neg_category | tojson}}
+        backgroundColor:[
+          'rgb(255,4,4)',
+          'rgb(255,4,4)',
+          'rgb(255,4,4)',
+        ],
+        borderWidth: 3,
+        borderRadius: 5,
+        borderColor: '#777',
+        hoverBorderColor:'#000'
+      }]
+    },
+    options: {
+      plugins:{
+        title:{
+          display: true,
+          text: 'Sentiment by Topics',
+          align: 'center',
+          padding:{
+            top: 10
+          }
+        },
+      },
+      responsive:true,
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true,
+        },
+      },
+      indexAxis:'y',
+      maintainAspectRatio:false,
+    }
+  })
+</script>
+
+<!-- End Stacked Chart ------------------------------- -->
+
+</html>
