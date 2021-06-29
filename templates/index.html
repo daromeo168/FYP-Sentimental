@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="{{url_for('static', filename='header.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='body.css')}}">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.0/chart.min.js"></script>
 
     <title>Homepage Sentiment Analysis</title>
@@ -26,18 +26,37 @@
         </div>
         <div class="text-center">
           <div class="fyp-txt header-right">CS402 - Final Year Project</div>
-          <div class="header-right" > By: Porchhay Ngov & Sidaro Keo</div>
+          <div class="by-txt header-right" > By: Porchhay Ngov & Sidaro Keo</div>
         </div>
       </div>
     </div>
-    
+
+    <!-- <button onclick="myFunction()">Toggle dark mode</button> -->
+
     <!-- Body -->
-      
-      <div style="padding-top: 50px;" class="graph-part">
+
+      <div class="graph-part">
+
+        <button onclick="myFunction()" id="modeSwitcher" class="button">Turn on dark mode</button>
+
         <div class="flex-column">
+          <button id="toggle" >Definition of keywords <br> Click to hide/show</button>
+          <id id="definition" >
+            <div><b>First Grpah:</b> list the words that the reviewer used the most.</div>
+            <div><b>Second Grpah:</b> the total of positive/neutral/negative from all topics.</div>
+            <div><b>Third Grpah:</b> the total of positive/neutral/negative in each topics. </div>
+            <div class="pnn-def">
+              <div> <b>Positive:</b>  when the software determines that the review is excellent.</div>
+              <div> <b>Neutral:</b>  when the software determines that the review is neither poor nor excellent.</div>
+              <div> <b>Negative:</b>  when the software determines that the review is poor.</div>
+            </div>
+          </id>
+
+        </div>
+
           <div class="flex-row">
             <div class="box-barChart" style="margin-right: 30px;"><canvas id="barChart"></canvas></div>
-            <div style="margin-left: 30px;"><canvas id="pieChart"></canvas></div>
+            <div class="box-pieChart"><canvas id="pieChart"></canvas></div>
           </div>
             <div class="box-StackedChart" ><canvas id="stackedChart"></canvas></div>
         </div>
@@ -56,6 +75,7 @@
     data:{
       labels:['security', 'expensive', 'service', 'tuition', 'cheap', 'like', 'love'],
       datasets:[{
+        label: 'The word that mostly used by the reviewer',
         data:[10,60,30,40,50,25,48,],
         backgroundColor:[
           'rgba(54, 162, 235, 0.6)'
@@ -69,10 +89,18 @@
       plugins:{
         title:{
           display: true,
-          text: 'Word frequency by Sentiment'
+          text: 'Word frequency by Sentiment',
+          font: {
+            size: 15
+          }
         },
         legend:{
           display:false,
+          labels:{
+            font:{
+              size:13,
+            }
+          }
         }
       },
       scales: {
@@ -89,7 +117,7 @@
       indexAxis:'y',
       maintainAspectRatio:false,
     },
-  
+
   });
 </script>
 
@@ -103,9 +131,9 @@ let pieChartData = new Chart(pieChart, {
   type: 'doughnut',
   data: {
   labels: [
-    'Negative',
+    'Positive',
     'Neutral',
-    'Positive'
+    'Negative'
   ],
   datasets: [{
     label: 'My First Dataset',
@@ -126,6 +154,17 @@ let pieChartData = new Chart(pieChart, {
           align: 'center',
           padding:{
             top: 10
+          },
+          font:{
+            size: 15
+          },
+        },
+        legend:{
+          display:true,
+          labels:{
+            font:{
+              size:13,
+            }
           }
         },
       },
@@ -139,11 +178,12 @@ let pieChartData = new Chart(pieChart, {
 
 <!-- Stacked Chart -->
 
+
 <script>
   let stackedChartData = new Chart(stackedChart, {
     type: 'bar',
     data: {
-      labels: ['Security', 'Service', 'Environment', 'Tuition', 'Canteen'], //[10,12,4,9] //{{pos_category | tojson}}
+      labels: ['Security', 'Service', 'Environment', 'Tuition', 'Canteen'], //[10,12,4,9]
       datasets: [{
         label: ['Positive'],
         data: {{pos_category | tojson}},
@@ -155,10 +195,10 @@ let pieChartData = new Chart(pieChart, {
         borderWidth: 3,
         borderRadius: 5,
         borderColor: '#777',
-        hoverBorderColor:'#000' 
+        hoverBorderColor:'#000'
       },{
         label: ['neutral'],
-        data: {{neut_category | tojson}}, // {{neut_category | tojson}}
+        data: {{neut_category | tojson}},
         backgroundColor:[
           'rgb(255,255,51)',
           'rgb(255,255,51)',
@@ -169,8 +209,8 @@ let pieChartData = new Chart(pieChart, {
         borderColor: '#777',
         hoverBorderColor:'#000'
       },{
-        label: ['Negative'], 
-        data: {{neg_category | tojson}}, //{{neg_category | tojson}}
+        label: ['Negative'],
+        data: {{neg_category | tojson}},
         backgroundColor:[
           'rgb(255,4,4)',
           'rgb(255,4,4)',
@@ -207,6 +247,37 @@ let pieChartData = new Chart(pieChart, {
     }
   })
 </script>
+
+<script>
+  const targetDiv = document.getElementById("definition");
+  const btn = document.getElementById("toggle");
+  btn.onclick = function () {
+    if (targetDiv.style.display !== "none") {
+      targetDiv.style.display = "none";
+    } else {
+      targetDiv.style.display = "block";
+    }
+  };
+</script>
+
+<script>
+  function myFunction() {
+	var element = document.body;
+	var btn = document.getElementById("modeSwitcher");
+	element.classList.toggle("dark-mode");
+	if(element.classList.contains("dark-mode"))
+	btn.innerHTML= "Dark mode is now On";
+	else
+	btn.innerHTML= "Dark mode is now Off";
+}
+</script>
+
+<!-- <script>
+  function myFunction() {
+     var element = document.body;
+     element.classList.toggle("dark-mode");
+  }
+  </script> -->
 
 <!-- End Stacked Chart ------------------------------- -->
 
