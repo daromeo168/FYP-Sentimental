@@ -1,4 +1,3 @@
-
 import pandas as pd
 from textblob import TextBlob
 from nltk.corpus import stopwords
@@ -9,7 +8,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 
 app = Flask(__name__)
-
 
 
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
@@ -24,6 +22,7 @@ sheetid = '1-axN2JfkmJc18DsmIW120PMZ6on-omMVUaRHdH6qHjM'
 
 
 df = pd.read_csv(f'https://docs.google.com/spreadsheets/d/{sheetid}/export?format=csv')
+
 
 def create_word_features(words):
     useful_words = [word for word in words if word not in stopwords.words("english")]
@@ -323,12 +322,10 @@ print("Total Data Sentiment: " + str(total_sen))
 #     if isSecurity(phrase) == True:
 #         print(phrase + ' = '+ sentiment_result(yeet.sentiment.polarity) )
 
-stop_words = set(stopwords.words('english'))
+
+stop_modify = {'were', 'from', 'just', 'who', 'what', 'further', "shouldn't", "needn't", 'each', 've', 'which', "you'll", "hasn't", 'below', 'out', 'shan', 'couldn', 'was', 'how', 'once', 'm', 'he', 'll', 'where', 'won', 'them', 'a', 'own', "hadn't", 'if', 'by', 'they', 'or', 'your', "you're", 'it', 's', 'after', 'in', 't', 'themselves', 'itself', 'few', 'now', 'before', 'do', 'until', 'but', "it's", 'haven', "doesn't", 'y', 'her', "isn't", "weren't", 'be', 'our', 'to', "she's", "you've", 'as', 'she', 'ourselves', 'there', 'then', 'ours', 'shouldn', 'yours', 'with', 'my', 'because', 'any', 'been', 'needn', 'while', 'hers', 'yourself', 'ma', 'their', 'mustn', 'other', "won't", 'only', 'not', 'that', 'have', 'herself', "didn't", 'under', "shan't", 'had', 'o', "haven't", 'such', 'above', 'same', 'between', 'mightn', 'd', 're', 'hasn', 'him', "mustn't", 'than', 'this', 'over', 'whom', 'myself', 'more', 'doing', 'against', 'during', 'down', 'both', "should've", 'can', "couldn't", 'don', 'an', 'me', "don't", 'through', 'isn', 'very', 'ain', 'being', 'having', 'most', 'didn', 'is', 'when', "aren't", 'no', 'are', 'some', 'at', 'into', 'on', 'again', 'i', "wasn't", 'yourselves', 'theirs', 'aren', 'weren', 'has', 'too', 'about', 'those', 'nor', "you'd", 'of', 'will', 'we', 'does', 'so', 'these', 'off', 'why', 'wouldn', "mightn't", 'up', 'his', 'did', 'its', 'am', "that'll", 'himself', 'you', 'the', 'wasn', 'all', 'doesn', 'hadn', 'should', "wouldn't", 'and', 'here', 'for'}
 
 word_COUNT = []
-superior = ['the', 'is', 'i', 'to', 'for', 'and', 'it', 'good', 'it', 'or','for',
-            'of']
-#
 
 
 
@@ -336,7 +333,7 @@ frequent_word_key= []
 frequent_word_value = []
 all_words = Counter(' '.join(df['TextDataReview']).lower().split()).most_common(25)
 for k, v in all_words:
-    if k not in stop_words:
+    if k not in stop_modify:
         frequent_word_key.append(k)
         frequent_word_value.append(v)
         # print(k, v)

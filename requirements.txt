@@ -2,6 +2,7 @@ cachetools==4.2.2
 certifi==2021.5.30
 chardet==4.0.0
 click==8.0.1
+collection==0.1.6
 colorama==0.4.4
 Flask==2.0.1
 google-auth==1.31.0
