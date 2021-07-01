@@ -1,0 +1,1016 @@
+body { 
+  
+    width: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100%;
+  }
+
+  .button {
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 24px;
+    border: 6px inset #3399ff;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+
+  }
+
+  .button:hover {
+    background-color: black;
+    color: white;
+  }
+
+  .dark-mode {
+    background-color: black;
+    color: white;
+  }
+
+  .dark-mode canvas{
+    border: 2px solid white;
+  }
+
+  .dark-mode #definition{
+    border: 2px dashed white;
+  }
+
+  .dark-mode .border-buttom{
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    margin: 40px 60px 40px 60px;
+  }
+
+
+  .border-buttom{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    margin: 40px 60px 40px 60px;
+
+  }
+
+
+  .container{
+    display:flex;
+    justify-content: space-evenly;
+    margin:40px 0px 40px 0px;
+    flex-wrap: wrap;
+  }
+
+  .txt-faculties{
+    margin: 20px 0px 0px 20px;
+    font-size: 24px;
+  }
+
+  .container-row{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .container-center{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+
+  .img-faculties{
+    position: relative;
+    /* border: 1px solid black; */
+    width: 30vw;
+    height: auto;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+
+.flex-row{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  
+}
+  
+.flex-column{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    
+  }
+
+.whole-body{
+  max-width: 100%;
+}
+
+.box-barChart{
+  position: relative;
+  width:600px;
+  height:350px;   
+  margin-bottom: 3vh ;
+  /* border:1px solid #000; */
+}
+
+.box-StackedChart{
+  position: relative;
+  width:600px;
+  height:350px;  
+}
+
+canvas {
+  border: 1px solid black;
+  padding: 10px 10px;
+}
+
+#definition{
+  display: none;
+  border: 2px dashed #000000;
+  padding: 10px 30px;
+}
+
+#toggle {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #263D91;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 9px #999;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+#toggle:hover {
+  opacity: 1;
+  background-color: #263D91;
+}
+
+#toggle:active {
+  background-color: black;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+
+/* footer */
+
+.footer-container{
+  width: 100%;
+  background-color: #263D91 ;
+  color: white;
+  height: 7vh;
+  display: flex;
+  justify-content: center;
+  /* font-size: 10px; */
+}
+
+.container-footer-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  /* margin-left: 20px; */
+}
+
+.dark-mode .footer-container{
+  background-color: #252569;
+}
+
+
+
+  /* ================================================================================================================== */
+
+  /* Media responsive */
+
+
+  @media only screen and (min-width: 280px) {
+
+    .button{
+      font-size: 8px;
+      border: 2px inset #3399ff;
+      border-radius: 5px;
+      margin: 10px 0px 10px 5px ;
+    }
+
+    #toggle{
+      font-size: 9px;
+      margin-bottom: 30px;
+      padding: 5px 10px;
+      box-shadow: 0 3px #999;
+    }
+
+    #definition{
+    
+      font-size: 13px;
+      padding: 10px 20px;
+      margin: 0px 15px 15px 15px;
+    }
+
+    .pnn-def{
+      padding-left: 20px;
+      font-size: 12px;
+    }
+
+    .box-barChart{
+      position: relative;
+      width: 80vw;
+      height: 50vh;
+      margin-bottom: 3vh;
+      margin-left: 5vw;
+
+    }
+
+    .box-pieChart{
+      position: relative;
+      width: 85vw;
+      height: 40vh;
+      margin-bottom: 3vh;
+      margin-right: 15px;
+    }
+
+    .box-StackedChart{
+      position: relative;
+      width: 88vw;
+      height: 60vh;
+      margin-bottom: 5vh;
+      margin-left: 5vw;
+    }
+
+    .container{
+      margin:30px 0px 30px 0px;
+      flex-wrap: wrap;
+    }
+  
+    .txt-faculties{
+      margin: 15px 0px 0px 10px;
+      font-size: 11px;
+    }
+
+    .container-left{
+      display:flex;
+      align-content: space-around;
+      margin:40px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+    .container-right{
+      display:flex;
+      align-content: space-around;
+      margin: 0px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+
+    .row-faculties {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .container-row{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 10px;
+      font-weight: bold;
+    }
+  
+  
+    .img-faculties{
+      position: relative;
+      width: 55vw;
+      height: auto;
+      margin: 10px;
+    }
+
+    .container-footer-row{
+      font-size: 7px;
+    }
+
+  }
+
+
+
+  @media only screen and (min-width: 315px) {
+
+    .button{
+      font-size: 10px;
+      border: 2px inset #3399ff;
+      border-radius: 5px;
+      margin: 10px 0px 10px 5px ;
+    }
+
+    #toggle{
+      font-size: 9px;
+      margin-bottom: 30px;
+      padding: 5px 10px;
+      box-shadow: 0 3px #999;
+    }
+
+    #definition{
+    
+      font-size: 13px;
+      padding: 10px 20px;
+      margin: 0px 15px 15px 15px;
+    }
+
+    .pnn-def{
+      padding-left: 20px;
+      font-size: 12px;
+    }
+
+    .box-barChart{
+      position: relative;
+      width: 80vw;
+      height: 50vh;
+      margin-bottom: 3vh;
+      margin-left: 5vw;
+
+    }
+
+    .box-pieChart{
+      position: relative;
+      width: 80vw;
+      height: 50vh;
+      margin-bottom: 3vh;
+      margin-right: 15px;
+    }
+
+    .box-StackedChart{
+      position: relative;
+      width: 88vw;
+      height: 60vh;
+      margin-bottom: 5vh;
+      margin-left: 5vw;
+    }
+
+    .container{
+      margin:40px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+  
+    .txt-faculties{
+      margin: 20px 0px 0px 10px;
+      font-size: 12px;
+    }
+
+    .container-left{
+      display:flex;
+      align-content: space-around;
+      margin:40px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+    .container-right{
+      display:flex;
+      align-content: space-around;
+      margin: 0px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+
+    .row-faculties {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .container-row{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 10px;
+      font-weight: bold;
+    }
+  
+  
+    .img-faculties{
+      position: relative;
+      width: 65vw;
+      height: auto;
+      margin: 10px;
+    }
+
+    .container-footer-row{
+      font-size: 8px;
+    }
+
+  }
+
+  @media only screen and (min-width: 340px) {
+
+    .button{
+      font-size: 10px;
+      border: 2px inset #3399ff;
+      border-radius: 5px;
+      margin: 10px 0px 10px 5px ;
+    }
+
+    .box-pieChart{
+      position: relative;
+      width: 70vw;
+      height: 55vh;
+      margin-bottom: 3vh;
+      margin-right: 15px;
+    }
+
+  }
+
+  @media only screen and (min-width: 350px) {
+
+    #toggle{
+      font-size: 13px;
+      margin-bottom: 30px;
+      padding: 5px 10px;
+      box-shadow: 0 3px #999;
+    }
+
+    #definition{
+      font-size: 14px;
+      padding: 10px 30px;
+      margin: 0px 20px 20px 20px;
+    }
+    .pnn-def{
+      padding-left: 20px;
+      font-size: 13px;
+    }
+    .box-barChart{
+      position: relative;
+      width: 80vw;
+      height: 50vh;
+      margin-bottom: 3vh;
+      margin-left: 5vw;
+
+    }
+
+    .box-pieChart{
+      position: relative;
+      width: 80vw;
+      height: 35vh;
+      margin-bottom: 15vh;
+      margin-right: 15px;
+    }
+
+    .box-StackedChart{
+      position: relative;
+      width: 88vw;
+      height: 60vh;
+      margin-bottom: 5vh;
+    }
+
+    .canvas{
+      font-size: 20px;
+    }
+
+    .container{
+      margin:40px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+  
+    .txt-faculties{
+      margin: 20px 0px 0px 20px;
+      font-size: 15px;
+    }
+
+    .container-left{
+      display:flex;
+      align-content: space-around;
+      margin:40px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+    .container-right{
+      display:flex;
+      align-content: space-around;
+      margin: 0px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+
+    .row-faculties {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .container-row{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 10px;
+      font-weight: bold;
+    }
+  
+  
+    .img-faculties{
+      position: relative;
+      /* border: 1px solid black; */
+      width: 60vw;
+      height: auto;
+      margin: 10px;
+    }
+
+    .container-footer-row{
+      font-size: 9px;
+    }
+
+  }
+
+  @media only screen and (min-width: 410px) {
+
+    .button{
+      font-size: 11px;
+      border: 3px inset #3399ff;
+      border-radius: 5px;
+      margin: 10px 0px 10px 5px ;
+    }
+  
+    .container{
+      margin:40px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+  
+    .txt-faculties{
+      margin: 20px 0px 0px 20px;
+      font-size: 15px;
+    }
+
+    .container-left{
+      display:flex;
+      align-content: space-around;
+      margin:40px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+    .container-right{
+      display:flex;
+      align-content: space-around;
+      margin: 0px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+
+    .row-faculties {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .container-row{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 11px;
+      font-weight: bold;
+    }
+  
+    .img-faculties{
+      position: relative;
+      /* border: 1px solid black; */
+      width: 55vw;
+      height: auto;
+      margin: 10px;
+    }
+
+  }
+
+  @media only screen and  (min-width:410px) and (height: 937px) {
+
+
+    .box-pieChart{
+      position: relative;
+      width: 65vw;
+      height: 55vh;
+      margin-bottom: 0vh;
+      margin-right: 15px;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+
+    /* .flex-row{
+      flex-wrap: nowrap;
+    } */
+
+    .button{
+      font-size: 15px;
+      border: 4px inset #3399ff;
+      border-radius:6px;
+      margin: 10px 0px 10px 5px ;
+    }
+
+    #toggle{
+      font-size: 17px;
+      margin-bottom: 30px;
+      padding: 5px 10px;
+      box-shadow: 0 3px #999;
+    }
+
+    #definition{
+      font-size: 21px;
+      padding: 20px 50px;
+      margin: 0px 30px 20px 30px;
+    }
+    .pnn-def{
+      padding-left: 40px;
+      font-size: 20px;
+    }
+
+    .box-barChart{
+      position: relative;
+      width: 80vw;
+      height: 50vh;
+      margin-bottom: 3vh;
+      margin-left: 5vw;
+
+    }
+
+    .box-pieChart{
+      position: relative;
+      width: 80vw;
+      height: 50vh;
+      margin-bottom: 15vh;
+      margin-right: 15px;
+    }
+
+    .box-StackedChart{
+      position: relative;
+      width: 88vw;
+      height: 60vh;
+      margin-bottom: 5vh;
+    }
+
+    .canvas{
+      font-size: 20px;
+    }
+  
+    .container{
+      margin:40px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+  
+    .txt-faculties{
+      margin: 20px 35px 0px 40px;
+      font-size: 24px;
+    }
+
+    .container-left{
+      display:flex;
+      align-content: space-around;
+      margin:40px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+    .container-right{
+      display:flex;
+      align-content: space-around;
+      margin: 0px 0px 40px 0px;
+      flex-wrap: wrap;
+    }
+
+    .row-faculties {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container-row{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  
+  
+    .img-faculties{
+      position: relative;
+      /* border: 1px solid black; */
+      width: 55vw;
+      height: auto;
+      margin: 10px;
+    }
+
+    .container-footer-row{
+      font-size: 12px;
+    }
+
+  }
+
+  @media only screen and (height: 720px) {
+    .box-pieChart{
+      position: relative;
+      width: 70vw;
+      height: 57vh;
+      margin-bottom: 0vh;
+      margin-right: 15px;
+    }
+  }
+
+  @media only screen and (height: 812px) {
+    .box-pieChart{
+      position: relative;
+      width: 80vw;
+      height: 40vh;
+      margin-bottom: 0vh;
+      margin-right: 15px;
+    }
+  }
+
+  @media only screen and (height: 823px) {
+    .box-pieChart{
+      position: relative;
+      width: 80vw;
+      height: 43vh;
+      margin-bottom: 0vh;
+      margin-right: 15px;
+    }
+  }
+
+  @media only screen and (min-width:768px) and (height: 937px){
+    .box-pieChart{
+      position: relative;
+      width: 70vw;
+      height: 80vh;
+      margin-bottom: 0vh;
+      margin-right: 15px;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+
+    /* .flex-row{
+      flex-wrap: nowrap;
+    } */
+
+    .button{
+      font-size: 22px;
+      border: 6px inset #3399ff;
+      border-radius:6px;
+      margin: 20px 0px 10px 15px ;
+    }
+
+
+    #toggle{
+      font-size: 22px;
+      margin-bottom: 40px;
+      padding: 5px 10px;
+      box-shadow: 0 3px #999;
+    }
+
+    #definition{
+      font-size: 25px;
+      padding: 20px 50px;
+      margin: 0px 40px 40px 40px;
+    }
+    .pnn-def{
+      padding-left: 40px;
+      font-size: 24px;
+    }
+
+    .box-barChart{
+      position: relative;
+      width: 80vw;
+      height: 50vh;
+      margin-bottom: 3vh;
+      margin-left: 5vw;
+
+    }
+
+    .box-pieChart{
+      position: relative;
+      width: 80vw;
+      height: 50vh;
+      margin-bottom: 15vh;
+      margin-right: 15px;
+    }
+
+    .box-StackedChart{
+      position: relative;
+      width: 88vw;
+      height: 60vh;
+      margin-bottom: 5vh;
+    }
+
+    .canvas{
+      font-size: 20px;
+    }
+
+    .container-footer-row{
+      font-size: 15px;
+    }
+
+    .container-left{
+      display:flex;
+      justify-content: flex-start;
+      margin:40px 0px 40px 0px;
+      width: 62%;
+      flex-wrap: nowrap;
+    
+    }
+    .container-right{
+      display:flex;
+      justify-content: flex-end;
+      border-left: 2px solid black;
+      padding-left: 68px;
+      margin:40px 0px 40px 0px;
+      flex-wrap: nowrap;
+      width:50%;
+    }
+  
+    .txt-faculties{
+      margin: 20px 0px 0px 20px;
+      font-size: 24px;
+    }
+  
+    .container-row{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+     
+    }
+
+    .row-faculties {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .img-faculties{
+      position: relative;
+      /* border: 1px solid black; */
+      width: 35vw;
+      height: auto;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+  
+    .dark-mode .container-right{
+      border-left: 2px solid white ;
+    }
+
+  }
+
+  @media only screen and  (min-width:1024px) and (height: 937px) {
+
+    .flex-row{
+      flex-wrap: nowrap;
+    }
+
+    .box-barChart{
+      position: relative;
+      width: 70vw;
+      height: 40vh;
+      margin-bottom: 3vh;
+      margin-left: 5vw;
+
+    }
+
+    .box-pieChart{
+      position: relative;
+      width: 32vw;
+      height: 50vh;
+      margin-bottom: 0vh;
+      margin-right: 15px;
+    }
+
+    .dark-mode .txt-faculties{
+      border-bottom: 1px solid white;
+    }
+  }
+
+  @media only screen and (min-width: 1440px) {
+
+    .flex-row{
+      flex-wrap: nowrap;
+      margin-right: 9vw;
+    }
+
+    #toggle{
+      font-size: 22px;
+      margin-bottom: 40px;
+      padding: 5px 10px;
+      box-shadow: 0 3px #999;
+    }
+
+    #definition{
+      font-size: 25px;
+      padding: 20px 50px;
+    }
+    .pnn-def{
+      padding-left: 40px;
+      font-size: 24px;
+    }
+
+
+    .box-barChart{
+      position: relative;
+      width: 35vw;
+      height: 50vh;
+      margin-bottom: 3vh;
+    }
+
+    .box-pieChart{
+      position: relative;
+      width: 25vw;
+      height: 50vh;
+      margin-bottom: 10vh;
+      margin-right: 15px;
+    }
+
+    .box-StackedChart{
+      position: relative;
+      width: 75vw;
+      height: 50vh;
+      margin-bottom: 100px;
+    }
+
+    .canvas{
+      font-size: 20px;
+    }
+
+    .border-buttom{
+      border-top: 3px solid black;
+      border-bottom: 3px solid black;
+      margin: 40px 60px 40px 60px;
+  
+    }
+  
+    .container-left{
+      display:flex;
+      /* align-content: space-around; */
+      justify-content: flex-start;
+      margin:40px 0px 40px 120px;
+      width: 54%;
+      flex-wrap: nowrap;
+      border-right: 1px solid black;
+    
+    }
+    .container-right{
+      display:flex;
+      /* align-content: space-around; */
+      justify-content: flex-end;
+      /* padding-left: 190px; */
+      margin:40px 0px 40px 0px;
+      padding-right: 80px;
+      flex-wrap: nowrap;
+      width:50%;
+      
+    }
+  
+    .txt-faculties{
+      margin: 20px 320px 0px 340px;
+      padding-bottom: 35px;
+      font-size: 24px;
+      border-bottom: 2px solid black;
+    }
+  
+    .container-row{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+     
+    }
+
+    .row-faculties {
+      display: flex;
+      flex-direction: row;
+    }
+  
+    .container-center{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+  
+  
+    .img-faculties{
+      position: relative;
+      /* border: 1px solid black; */
+      width: 30vw;
+      height: auto;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    .dark-mode .container-left{
+      border-right: 1px solid white ;
+    }
+
+    .dark-mode .txt-faculties{
+      border-bottom: 1px solid white;
+    }
+
+  }
+

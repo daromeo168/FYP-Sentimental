@@ -21,8 +21,8 @@
     <div class="header">
       <div class="row">
         <div class="text-center">
-          <img class="img" src="{{url_for('static', filename='paragon-logo.png')}}" alt="">
-          <a href="#default" class="logo">Sentiment PARAGONIU Sector</a>
+          <a href="/"><img class="img" src="{{url_for('static', filename='paragon-logo.png')}}" alt=""></a>
+          <a href="/policies" class="logo">PIU Sentimental Analysis</a>
         </div>
         <div class="text-center">
           <div class="fyp-txt header-right">CS402 - Final Year Project</div>
@@ -35,32 +35,80 @@
 
     <!-- Body -->
 
-      <div class="graph-part">
+    <button onclick="myFunction()" id="modeSwitcher" class="button">Turn on dark mode</button>
 
-        <button onclick="myFunction()" id="modeSwitcher" class="button">Turn on dark mode</button>
 
-        <div class="flex-column">
-          <button id="toggle" >Definition of keywords <br> Click to hide/show</button>
-          <id id="definition" >
-            <div><b>First Grpah:</b> list the words that the reviewer used the most.</div>
-            <div><b>Second Grpah:</b> the total of positive/neutral/negative from all topics.</div>
-            <div><b>Third Grpah:</b> the total of positive/neutral/negative in each topics. </div>
-            <div class="pnn-def">
-              <div> <b>Positive:</b>  when the software determines that the review is excellent.</div>
-              <div> <b>Neutral:</b>  when the software determines that the review is neither poor nor excellent.</div>
-              <div> <b>Negative:</b>  when the software determines that the review is poor.</div>
-            </div>
-          </id>
+    <!-- lastest Update  -->
+    
+   <div class="border-buttom">
 
-        </div>
+     <div class="txt-faculties">This website will be demonstrate the performance of each faculities from Paragon Internation University that could overall qualities of the school. So we decided to pick 5 faculties which included:
+     </div>
 
-          <div class="flex-row">
-            <div class="box-barChart" style="margin-right: 30px;"><canvas id="barChart"></canvas></div>
-            <div class="box-pieChart"><canvas id="pieChart"></canvas></div>
-          </div>
-            <div class="box-StackedChart" ><canvas id="stackedChart"></canvas></div>
-        </div>
-      </div>
+     <div class="row-faculties">
+       <div class="container-left">
+         <div class="container-row">
+           <img class="img-faculties" src="{{url_for('static', filename='service.png')}}" alt="">
+           <div>Service</div>
+           <img class="img-faculties" src="{{url_for('static', filename='tuition.jpg')}}" alt="">
+           <div>Tuition</div>
+         </div>
+       </div>
+
+       <div class="container-right">
+         <div class="container-row">
+           <img class="img-faculties" src="{{url_for('static', filename='canteen.jpg')}}" alt="">
+           <div>Canteen</div>
+           <img class="img-faculties" src="{{url_for('static', filename='confhall.jpg')}}" alt="">
+           <div>Environment</div>
+         </div>
+       </div>
+     </div>
+
+     <div class="container-center">
+       <div class="container-row">
+         <img class="img-faculties" src="{{url_for('static', filename='sokheng.jpg')}}" alt="">
+         <div>Security</div>
+       </div>
+     </div>
+
+   </div>
+
+    
+   <!--  -->
+
+
+   <div class="flex-column">
+
+     <button id="toggle" >Definition of keywords <br> Click to hide/show</button>
+     <id id="definition" >
+       <div><b>First Grpah:</b> list the words that the reviewer used the most.</div>
+       <div><b>Second Grpah:</b> the total of positive/neutral/negative from all topics.</div>
+       <div><b>Third Grpah:</b> the total of positive/neutral/negative in each topics. </div>
+       <div class="pnn-def">
+         <div> <b>Positive:</b>  when the software determines that the review is excellent.</div>
+         <div> <b>Neutral:</b>  when the software determines that the review is neither poor nor excellent.</div>
+         <div> <b>Negative:</b>  when the software determines that the review is poor.</div>
+       </div>
+     </id>
+
+     <div class="flex-row">
+       <div class="box-barChart" style="margin-right: 30px;"><canvas id="barChart"></canvas></div>
+       <div class="box-pieChart"><canvas id="pieChart"></canvas></div>
+     </div>
+       <div class="box-StackedChart" ><canvas id="stackedChart"></canvas></div>
+   </div>
+ </div>
+
+ <!-- footer -->
+
+ <div class="footer-container" >
+   <div class="container-footer-row">
+     <div>All rights reserved. Copyright © 2020 - 2021 Porchhay Ngov & Sidaro Keo</div>
+   </div>
+ </div>
+
+
 </body>
 
 <!-- End of body -->
@@ -68,57 +116,56 @@
 <!-- Bar Chart -->
 
 <script>
-  // let barChart = document.getElementById('barChart').getContext('2d')
+// let barChart = document.getElementById('barChart').getContext('2d')
 
-  let barChartData = new Chart(barChart, {
-    type:'bar',
-    data:{
-      labels:['security', 'expensive', 'service', 'tuition', 'cheap', 'like', 'love'],
-      datasets:[{
-        label: 'The word that mostly used by the reviewer',
-        data:[10,60,30,40,50,25,48,],
-        backgroundColor:[
-          'rgba(54, 162, 235, 0.6)'
-        ],
-        borderWidth: 4,
-        borderColor: '#777',
-        hoverBorderColor:'#000'
-      }]
-    },
-    options:{
-      plugins:{
-        title:{
-          display: true,
-          text: 'Word frequency by Sentiment',
-          font: {
-            size: 15
-          }
-        },
-        legend:{
-          display:false,
-          labels:{
-            font:{
-              size:13,
-            }
-          }
-        }
-      },
-      scales: {
-        xAxes: [{
-          gridLines: {
-          display: false
-          }
-        }],
-        y: {
-          max: 6,
-          min: 0,
-        }
-      },
-      indexAxis:'y',
-      maintainAspectRatio:false,
-    },
+let barChartData = new Chart(barChart, {
+type:'bar',
+data:{
+ labels:{{fwk | tojson}}, //key
+ datasets:[{
+   data:{{fwv | tojson}},  //value
+   backgroundColor:[
+     'rgba(54, 162, 235, 0.6)'
+   ],
+   borderWidth: 4,
+   borderColor: '#777',
+   hoverBorderColor:'#000'
+ }]
+},
+options:{
+ plugins:{
+   title:{
+     display: true,
+     text: 'Word frequency by Sentiment',
+     font: {
+       size: 15
+     }
+   },
+   legend:{
+     display:false,
+     labels:{
+       font:{
+         size:13,
+       }
+     }
+   }
+ },
+ scales: {
+   xAxes: [{
+     gridLines: {
+     display: false
+     }
+   }],
+   y: {
+     max: 6,
+     min: 0,
+   }
+ },
+ indexAxis:'y',
+ maintainAspectRatio:false,
+},
 
-  });
+});
 </script>
 
 <!-- End Bar chart -------------------------------------------------------------------------- -->
@@ -128,47 +175,47 @@
 <script>
 
 let pieChartData = new Chart(pieChart, {
-  type: 'doughnut',
-  data: {
-  labels: [
-    'Positive',
-    'Neutral',
-    'Negative'
-  ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [{{negative_point}},{{Neutral_point}}, {{positive_point}}],
-    backgroundColor: [
-      'rgb(0, 0, 0)',
-      'rgb(128,128,128)',
-      'rgb(54, 162, 235)',
-    ],
-    hoverOffset: 4
-  }]
-  },
-  options:{
-    plugins:{
-        title:{
-          display: true,
-          text: 'Review Classification',
-          align: 'center',
-          padding:{
-            top: 10
-          },
-          font:{
-            size: 15
-          },
-        },
-        legend:{
-          display:true,
-          labels:{
-            font:{
-              size:13,
-            }
-          }
-        },
-      },
-  }
+type: 'doughnut',
+data: {
+labels: [
+'Positive',
+'Neutral',
+'Negative'
+],
+datasets: [{
+label: 'My First Dataset',
+data: [{{negative_point}},{{Neutral_point}}, {{positive_point}}],
+backgroundColor: [
+ 'rgb(0, 0, 0)',
+ 'rgb(128,128,128)',
+ 'rgb(54, 162, 235)',
+],
+hoverOffset: 4
+}]
+},
+options:{
+plugins:{
+   title:{
+     display: true,
+     text: 'Review Classification',
+     align: 'center',
+     padding:{
+       top: 10
+     },
+     font:{
+       size: 15
+     },
+   },
+   legend:{
+     display:true,
+     labels:{
+       font:{
+         size:13,
+       }
+     }
+   },
+ },
+}
 });
 
 </script>
@@ -178,106 +225,127 @@ let pieChartData = new Chart(pieChart, {
 
 <!-- Stacked Chart -->
 
-
 <script>
-  let stackedChartData = new Chart(stackedChart, {
-    type: 'bar',
-    data: {
-      labels: ['Security', 'Service', 'Environment', 'Tuition', 'Canteen'], //[10,12,4,9]
-      datasets: [{
-        label: ['Positive'],
-        data: {{pos_category | tojson}},
-        backgroundColor:[
-          'rgb(37,246,30)',
-          'rgb(37,246,30)',
-          'rgb(37,246,30)',
-        ],
-        borderWidth: 3,
-        borderRadius: 5,
-        borderColor: '#777',
-        hoverBorderColor:'#000'
-      },{
-        label: ['neutral'],
-        data: {{neut_category | tojson}},
-        backgroundColor:[
-          'rgb(255,255,51)',
-          'rgb(255,255,51)',
-          'rgb(255,255,51)',
-        ],
-        borderWidth: 3,
-        borderRadius: 5,
-        borderColor: '#777',
-        hoverBorderColor:'#000'
-      },{
-        label: ['Negative'],
-        data: {{neg_category | tojson}},
-        backgroundColor:[
-          'rgb(255,4,4)',
-          'rgb(255,4,4)',
-          'rgb(255,4,4)',
-        ],
-        borderWidth: 3,
-        borderRadius: 5,
-        borderColor: '#777',
-        hoverBorderColor:'#000'
-      }]
-    },
-    options: {
-      plugins:{
-        title:{
-          display: true,
-          text: 'Sentiment by Topics',
-          align: 'center',
-          padding:{
-            top: 10
-          }
-        },
-      },
-      responsive:true,
-      scales: {
-        x: {
-          stacked: true,
-        },
-        y: {
-          stacked: true,
-        },
-      },
-      indexAxis:'y',
-      maintainAspectRatio:false,
-    }
-  })
+let stackedChartData = new Chart(stackedChart, {
+type: 'bar',
+data: {
+ labels: ['Security', 'Service', 'Environment', 'Tuition', 'Canteen'], //[10,12,4,9]
+ datasets: [{
+   label: ['Positive'],
+   data: {{pos_category | tojson}},
+   backgroundColor:[
+     'rgb(37,246,30)',
+     'rgb(37,246,30)',
+     'rgb(37,246,30)',
+   ],
+   borderWidth: 3,
+   borderRadius: 5,
+   borderColor: '#777',
+   hoverBorderColor:'#000' 
+ },{
+   label: ['neutral'],
+   data: {{neut_category | tojson}},
+   backgroundColor:[
+     'rgb(255,255,51)',
+     'rgb(255,255,51)',
+     'rgb(255,255,51)',
+   ],
+   borderWidth: 3,
+   borderRadius: 5,
+   borderColor: '#777',
+   hoverBorderColor:'#000'
+ },{
+   label: ['Negative'],
+   data: {{neg_category | tojson}},
+   backgroundColor:[
+     'rgb(255,4,4)',
+     'rgb(255,4,4)',
+     'rgb(255,4,4)',
+   ],
+   borderWidth: 3,
+   borderRadius: 5,
+   borderColor: '#777',
+   hoverBorderColor:'#000'
+ }]
+},
+options: {
+ plugins:{
+   title:{
+     display: true,
+     text: 'Sentiment by Topics',
+     align: 'center',
+     padding:{
+       top: 10
+     },
+     font:{
+       size:15
+     }
+   },
+   legend:{
+     display:true,
+     labels:{
+       font:{
+         size:13,
+       }
+     }
+   },
+ },
+ responsive:true,
+ scales: {
+   x: {
+     stacked: true,
+   },
+   y: {
+     stacked: true,
+   },
+ },
+ indexAxis:'y',
+ maintainAspectRatio:false,
+}
+})
 </script>
 
 <script>
-  const targetDiv = document.getElementById("definition");
-  const btn = document.getElementById("toggle");
-  btn.onclick = function () {
-    if (targetDiv.style.display !== "none") {
-      targetDiv.style.display = "none";
-    } else {
-      targetDiv.style.display = "block";
-    }
-  };
+const targetDiv = document.getElementById("definition");
+const btn = document.getElementById("toggle");
+btn.onclick = function () {
+if (targetDiv.style.display !== "none") {
+ targetDiv.style.display = "none";
+} else {
+ targetDiv.style.display = "block";
+}
+};
 </script>
 
+<!-- <script>
+function toggle1() {
+var x = document.getElementById("definition");
+if (x.classList.contains("hide")) {
+ x.classList.remove("hide");
+} else {
+ x.classList.add("hide");
+}
+}
+</script> -->
+
 <script>
-  function myFunction() {
-	var element = document.body;
-	var btn = document.getElementById("modeSwitcher");
-	element.classList.toggle("dark-mode");
-	if(element.classList.contains("dark-mode"))
-	btn.innerHTML= "Dark mode is now On";
-	else
-	btn.innerHTML= "Dark mode is now Off";
+function myFunction() {
+var element = document.body;
+var btn = document.getElementById("modeSwitcher");
+element.classList.toggle("dark-mode");
+if(element.classList.contains("dark-mode"))
+btn.innerHTML= "Dark mode is now On";
+else 
+btn.innerHTML= "Dark mode is now Off";
 }
 </script>
 
 <!-- <script>
-  function myFunction() {
-     var element = document.body;
-     element.classList.toggle("dark-mode");
-  }
-  </script> -->
+function myFunction() {
+var element = document.body;
+element.classList.toggle("dark-mode");
+}
+</script> -->
 
 <!-- End Stacked Chart ------------------------------- -->
 

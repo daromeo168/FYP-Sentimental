@@ -4,6 +4,7 @@ from textblob import TextBlob
 from nltk.corpus import stopwords
 from flask import Flask, render_template, request, redirect, session
 import gspread
+from collections import Counter
 from oauth2client.service_account import ServiceAccountCredentials
 
 
@@ -322,17 +323,31 @@ print("Total Data Sentiment: " + str(total_sen))
 #     if isSecurity(phrase) == True:
 #         print(phrase + ' = '+ sentiment_result(yeet.sentiment.polarity) )
 
+stop_words = set(stopwords.words('english'))
+
+word_COUNT = []
+superior = ['the', 'is', 'i', 'to', 'for', 'and', 'it', 'good', 'it', 'or','for',
+            'of']
 #
-# word_COUNT = []
-# superior = ['the', 'is', 'i', 'to', 'for', 'and', 'it', 'good', 'it', 'or','for']
-#
-#
-#
-# all_words = Counter(' '.join(df['TextDataReview']).lower().split()).most_common(30)
-#
+
+
+
+frequent_word_key= []
+frequent_word_value = []
+all_words = Counter(' '.join(df['TextDataReview']).lower().split()).most_common(25)
+for k, v in all_words:
+    if k not in stop_words:
+        frequent_word_key.append(k)
+        frequent_word_value.append(v)
+        # print(k, v)
+
+fwk = frequent_word_key[:5]
+fwv = frequent_word_value[:5]
+
 # for word in all_words:
 #     if word not in superior:
 #         print(word)
+
 
 # print(all_words[9:10])
 
@@ -343,7 +358,13 @@ def hello():
     return render_template('index.html', total_sen=total_sen,
                            neg_p=negative_point, neut_p=Neutral_point, pos_category=pos_category,
                            neg_category=neg_category,neut_category=neut_category,
-                           positive_point=positive_point, negative_point=negative_point, Neutral_point=Neutral_point)
+                           positive_point=positive_point, negative_point=negative_point, Neutral_point=Neutral_point,
+                           fwk=fwk, fwv=fwv)
+
+@app.route('/policies',methods = ["GET"])
+def policies():
+    return render_template('spart.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
