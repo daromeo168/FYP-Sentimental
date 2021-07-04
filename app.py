@@ -20,7 +20,6 @@ spreadsheet = client.open('CSV-to-Google-Sheet')
 
 sheetid = '1-axN2JfkmJc18DsmIW120PMZ6on-omMVUaRHdH6qHjM'
 
-
 df = pd.read_csv(f'https://docs.google.com/spreadsheets/d/{sheetid}/export?format=csv')
 
 

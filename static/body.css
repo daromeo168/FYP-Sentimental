@@ -952,7 +952,7 @@ background-color: #252569;
     margin:40px 0px 40px 120px;
     width: 54%;
     flex-wrap: nowrap;
-    border-right: 1px solid black;
+    /* border-right: 1px solid black; */
   
   }
   .container-right{

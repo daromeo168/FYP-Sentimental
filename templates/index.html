@@ -22,11 +22,10 @@
       <div class="row">
         <div class="text-center">
           <a href="/"><img class="img" src="{{url_for('static', filename='paragon-logo.png')}}" alt=""></a>
-          <a href="/policies" class="logo">PIU Sentimental Analysis</a>
+          <a href="/policies" class="logo">How it work</a>
         </div>
         <div class="text-center">
-          <div class="fyp-txt header-right">CS402 - Final Year Project</div>
-          <div class="by-txt header-right" > By: Porchhay Ngov & Sidaro Keo</div>
+          <div class="fyp-txt header-right">PIU Sentimental Analysis</div>
         </div>
       </div>
     </div>
@@ -42,7 +41,9 @@
     
    <div class="border-buttom">
 
-     <div class="txt-faculties">This website will be demonstrate the performance of each faculities from Paragon Internation University that could overall qualities of the school. So we decided to pick 5 faculties which included:
+     <div class="txt-faculties"> <!-- TEXT HERE -->This website will be demonstrate the performance of certain facilities from Paragon Internation University that could impact the overall quality of the school
+       by using algorithm that we have implemented.
+       Infographic below.
      </div>
 
      <div class="row-faculties">
@@ -67,7 +68,7 @@
 
      <div class="container-center">
        <div class="container-row">
-         <img class="img-faculties" src="{{url_for('static', filename='sokheng.jpg')}}" alt="">
+         <img class="img-faculties" src="{{url_for('static', filename='security.png')}}" alt="">
          <div>Security</div>
        </div>
      </div>
@@ -80,16 +81,17 @@
 
    <div class="flex-column">
 
-     <button id="toggle" >Definition of keywords <br> Click to hide/show</button>
+     <button id="toggle" >Click Me <br> Show/Hide</button>
      <id id="definition" >
        <div><b>First Grpah:</b> list the words that the reviewer used the most.</div>
-       <div><b>Second Grpah:</b> the total of positive/neutral/negative from all topics.</div>
-       <div><b>Third Grpah:</b> the total of positive/neutral/negative in each topics. </div>
+       <div><b>Second Grpah:</b> Sentiment polarity score from all facility.</div>
+       <div><b>Third Grpah:</b> Sentiment polarity score of each facility. </div>
        <div class="pnn-def">
          <div> <b>Positive:</b>  when the software determines that the review is excellent.</div>
          <div> <b>Neutral:</b>  when the software determines that the review is neither poor nor excellent.</div>
          <div> <b>Negative:</b>  when the software determines that the review is poor.</div>
        </div>
+       <div><b>Hover on the bar to display value.</b></div>
      </id>
 
      <div class="flex-row">
@@ -272,7 +274,7 @@ options: {
  plugins:{
    title:{
      display: true,
-     text: 'Sentiment by Topics',
+     text: 'Sentiment by facility',
      align: 'center',
      padding:{
        top: 10
