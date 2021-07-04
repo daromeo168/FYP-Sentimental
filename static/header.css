@@ -115,12 +115,6 @@ body {
       height: 9vh;
     }
 
-    .button {
-      font-family: "Arial Black", Gadget, sans-serif;
-      font-size: 8px;
-      border: 2px inset #3399ff;
-      border-radius: 10px;
-    }
 
     .header a.logo{
       font-size: 11px;
