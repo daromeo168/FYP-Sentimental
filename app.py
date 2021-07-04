@@ -357,8 +357,8 @@ def hello():
                            positive_point=positive_point, negative_point=negative_point, Neutral_point=Neutral_point,
                            fwk=fwk, fwv=fwv)
 
-@app.route('/policies',methods = ["GET"])
-def policies():
+@app.route('/howItWork',methods = ["GET"])
+def howItWork():
     return render_template('spart.html')
 
 
