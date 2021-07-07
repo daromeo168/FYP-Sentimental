@@ -1,7 +1,7 @@
 import pandas as pd
 from textblob import TextBlob
 from nltk.corpus import stopwords
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 import gspread
 from collections import Counter
 from oauth2client.service_account import ServiceAccountCredentials
@@ -21,6 +21,8 @@ spreadsheet = client.open('CSV-to-Google-Sheet')
 sheetid = '1-axN2JfkmJc18DsmIW120PMZ6on-omMVUaRHdH6qHjM'
 
 df = pd.read_csv(f'https://docs.google.com/spreadsheets/d/{sheetid}/export?format=csv')
+
+
 
 
 def create_word_features(words):
@@ -56,7 +58,6 @@ def balancingScore(value, object):
     if value > 0:
         return "Positive " + str(value)
 
-secure_sent = 0
 def isSecurity(wordSecurity):
     parkingBox = ["car", "parking", "moto", "motocycle", "bike", "park", "parking lot", "guard", "bodyguard", "security", "camera", "vehicle", "Loss and found", "found"]
 
@@ -64,14 +65,14 @@ def isSecurity(wordSecurity):
         if gem in wordSecurity.lower():
             return True
 
-tuition_sent = 0
+
 def isTuition(bitPrice):
     feeBox = ["school price", "tuition", "school payment","school" + "fee" ]
     for dols in feeBox:
         if dols in bitPrice.lower():
             return True
 
-cant_sent = 0
+
 def ratingCanteen(numbs):
     if numbs == "1":
         value = -0.9
@@ -93,14 +94,15 @@ def ratingCanteen(numbs):
         value = 0.9
 
         return value
-env_sent = 0
+
 def isEnvironment(facilitiy):
 
     facilBoxy = ["hall", "library", "classroom", "clean", "dirty", "atmosphere", "air", "hot", "cold", "conference", "toilet", "garden", "scenary", "computerhall", "environment"]
     for sameSame in facilBoxy:
         if sameSame in facilitiy.lower():
             return True
-service_sent = 0
+
+
 def isService(service):
 
     serviceBox = ["receptionist ", "behavior", "service", "borrowing", "reserving", "reservation"]
@@ -109,7 +111,7 @@ def isService(service):
         if something in service.lower():
             return True
 
-#
+
 # def isSecurity(wordSecurity):
 #     if "security" in wordSecurity.lower():
 #         return True
@@ -152,169 +154,329 @@ def sentiment_result(value):
 #     print("Environment Neutral: " + str(neut_env_sent))
 #
 
+def algo():
+    secure_sent = 0
+    tuition_sent = 0
+    cant_sent = 0
+    env_sent = 0
+    service_sent = 0
+    negative_point = 0
+    Neutral_point = 0
+    positive_point = 0
 
+    pos_service_sent = 0
+    neg_service_sent = 0
+    neut_service_sent = 0
 
+    pos_tuition_sent = 0
+    neg_tuition_sent = 0
+    neut_tuition_sent = 0
 
-negative_point = 0
-Neutral_point = 0
-positive_point = 0
+    pos_secure_sent = 0
+    neg_secure_sent = 0
+    neut_secure_sent = 0
 
-pos_service_sent = 0
-neg_service_sent =0
-neut_service_sent = 0
+    pos_env_sent = 0
+    neg_env_sent = 0
+    neut_env_sent = 0
 
-pos_tuition_sent = 0
-neg_tuition_sent = 0
-neut_tuition_sent = 0
+    pos_canteen_sent = 0
+    neut_canteen_sent = 0
+    neg_canteen_sent = 0
 
-pos_secure_sent = 0
-neg_secure_sent = 0
-neut_secure_sent = 0
+    newInf = pos_service_sent, pos_tuition_sent + 1, pos_secure_sent, pos_env_sent + 1
 
-pos_env_sent = 0
-neg_env_sent = 0
-neut_env_sent = 0
+    for phrase in df['TextDataReview']:
+        manjiGang = TextBlob(phrase)
+        poleRate = ["1", "2", "3", "4", "5"]
 
-pos_canteen_sent = 0
-neut_canteen_sent = 0
-neg_canteen_sent = 0
+        word = 0
+        for ratingSession in poleRate:
+            # Supporting the Pole
+            if phrase == ratingSession:
+                # print("Sentiment Point: " + str(ratingCanteen(phrase)))
+                # print("Sentence: Poll review for canteen => :" + phrase)
+                # print("Polarity result: " + sentiment_result(ratingCanteen(phrase)))
+                # print("\n")
+                cant_sent += 1
+                if sentiment_result(ratingCanteen(phrase)) == "Positive":
+                    positive_point += 1
+                    pos_canteen_sent += 1
+                if sentiment_result(ratingCanteen(phrase)) == "Negative":
+                    negative_point += 1
+                    neg_canteen_sent += 1
+                if sentiment_result(ratingCanteen(phrase)) == "Neutral":
+                    Neutral_point += 1
+                    neut_canteen_sent += 1
 
-newInf = pos_service_sent, pos_tuition_sent+1, pos_secure_sent, pos_env_sent+1
+        # Regular data
+        if phrase != "1":
+            if phrase != "2":
+                if phrase != "3":
+                    if phrase != "4":
+                        if phrase != "5":
+                            # print("Sentiment point:  " + str(manjiGang.sentiment.polarity))
+                            # print("Sentence :" + phrase)
+                            # print("Polarity result: " + sentiment_result(manjiGang.sentiment.polarity))
+                            # print("\n")
+                            if sentiment_result(manjiGang.sentiment.polarity) == "Positive":
+                                positive_point += 1
+                                # pos neg neu of each cate guidance
+                                if isService(phrase) == True:
+                                    pos_service_sent += 1
 
+                                elif isTuition(phrase) == True:
+                                    pos_tuition_sent += 1
 
-for phrase in df['TextDataReview']:
-    manjiGang = TextBlob(phrase)
-    poleRate = ["1", "2", "3", "4", "5"]
+                                elif isSecurity(phrase) == True:
+                                    pos_secure_sent += 1
 
-    word = 0
-    for ratingSession in poleRate:
-        # Supporting the Pole
-        if phrase == ratingSession:
-            # print("Sentiment Point: " + str(ratingCanteen(phrase)))
-            # print("Sentence: Poll review for canteen => :" + phrase)
-            # print("Polarity result: " + sentiment_result(ratingCanteen(phrase)))
-            # print("\n")
-            cant_sent += 1
-            if sentiment_result(ratingCanteen(phrase)) == "Positive":
-                positive_point += 1
-                pos_canteen_sent += 1
-            if sentiment_result(ratingCanteen(phrase)) == "Negative":
-                negative_point += 1
-                neg_canteen_sent += 1
-            if sentiment_result(ratingCanteen(phrase)) == "Neutral":
-                Neutral_point += 1
-                neut_canteen_sent += 1
+                                elif isEnvironment(phrase) == True:
+                                    pos_env_sent += 1
 
+                            if sentiment_result(manjiGang.sentiment.polarity) == "Negative":
+                                negative_point += 1
+                                if isService(phrase) == True:
+                                    neg_service_sent += 1
 
+                                elif isTuition(phrase) == True:
+                                    neg_tuition_sent += 1
 
-    # Regular data
-    if phrase != "1":
-        if phrase != "2":
-            if phrase != "3":
-                if phrase != "4":
-                    if phrase != "5":
-                        # print("Sentiment point:  " + str(manjiGang.sentiment.polarity))
-                        # print("Sentence :" + phrase)
-                        # print("Polarity result: " + sentiment_result(manjiGang.sentiment.polarity))
-                        # print("\n")
-                        if sentiment_result(manjiGang.sentiment.polarity) == "Positive":
-                            positive_point += 1
-                            # pos neg neu of each cate guidance
+                                elif isSecurity(phrase) == True:
+                                    neg_secure_sent += 1
+
+                                elif isEnvironment(phrase) == True:
+                                    neg_env_sent += 1
+
+                            if sentiment_result(manjiGang.sentiment.polarity) == "Neutral":
+                                Neutral_point += 1
+                                if isService(phrase) == True:
+                                    neut_service_sent += 1
+                                elif isTuition(phrase) == True:
+                                    neut_tuition_sent += 1
+                                elif isSecurity(phrase) == True:
+                                    neut_secure_sent += 1
+                                elif isEnvironment(phrase) == True:
+                                    neut_env_sent += 1
+
                             if isService(phrase) == True:
-                                pos_service_sent += 1
+                                service_sent += 1
 
-                            elif isTuition(phrase) == True:
-                                pos_tuition_sent += 1
+                            if isTuition(phrase) == True:
+                                tuition_sent += 1
 
-                            elif isSecurity(phrase) == True:
-                                pos_secure_sent += 1
+                            if isSecurity(phrase) == True:
+                                secure_sent += 1
 
-                            elif isEnvironment(phrase) == True:
-                                pos_env_sent += 1
+                            if isEnvironment(phrase) == True:
+                                env_sent += 1
 
-                        if sentiment_result(manjiGang.sentiment.polarity) == "Negative":
-                            negative_point += 1
-                            if isService(phrase) == True:
-                                neg_service_sent += 1
+    newEgg = []
+    print("Service ========> " + str(service_sent))
+    print("tuition ========> " + str(tuition_sent))
+    print("Security ========> " + str(secure_sent))
+    print("Environment ========> " + str(env_sent))
+    print("canteen ========> " + str(cant_sent))
 
-                            elif isTuition(phrase) == True:
-                                neg_tuition_sent += 1
+    # serviceFullInfo()
+    # tuitionFullInfo()
+    # envFullInfo()
+    # securityFullInfo()
+    pos_category = []
 
-                            elif isSecurity(phrase) == True:
-                                neg_secure_sent += 1
+    pos_category.append(pos_secure_sent)
+    pos_category.append(pos_service_sent)
+    pos_category.append(pos_env_sent + 1)
+    pos_category.append(pos_tuition_sent + 1)
+    pos_category.append(pos_canteen_sent)
 
-                            elif isEnvironment(phrase) == True:
-                                neg_env_sent += 1
+    neg_category = []
 
-                        if sentiment_result(manjiGang.sentiment.polarity) == "Neutral":
-                            Neutral_point += 1
-                            if isService(phrase) == True:
-                                neut_service_sent += 1
-                            elif isTuition(phrase) == True:
-                                neut_tuition_sent += 1
-                            elif isSecurity(phrase) == True:
-                                neut_secure_sent += 1
-                            elif isEnvironment(phrase) == True:
-                                neut_env_sent += 1
+    neg_category.append(neg_secure_sent)
+    neg_category.append(neg_service_sent)
+    neg_category.append(neg_env_sent)
+    neg_category.append(neg_tuition_sent)
+    neg_category.append(neg_canteen_sent)
 
-                        if isService(phrase) == True:
-                            service_sent += 1
+    neut_category = []
 
-                        if isTuition(phrase) == True:
-                            tuition_sent += 1
+    neut_category.append(neut_secure_sent)
+    neut_category.append(neut_service_sent)
+    neut_category.append(neut_env_sent)
+    neut_category.append(neut_tuition_sent)
+    neut_category.append(neut_canteen_sent)
 
-                        if isSecurity(phrase) == True:
-                            secure_sent += 1
+    total_sen = 0
 
-                        if isEnvironment(phrase) == True:
-                            env_sent += 1
+    for something in df['TextDataReview']:
+        total_sen += 1
 
-newEgg =[]
-print("Service ========> " + str(service_sent))
-print("tuition ========> " + str(tuition_sent))
-print("Security ========> " + str(secure_sent))
-print("Environment ========> " + str(env_sent))
-print("canteen ========> " + str(cant_sent))
-
-# serviceFullInfo()
-# tuitionFullInfo()
-# envFullInfo()
-# securityFullInfo()
-pos_category= []
-
-pos_category.append(pos_secure_sent)
-pos_category.append(pos_service_sent)
-pos_category.append(pos_env_sent+1)
-pos_category.append(pos_tuition_sent+1)
-pos_category.append(pos_canteen_sent)
-
-neg_category = []
-
-neg_category.append(neg_secure_sent)
-neg_category.append(neg_service_sent)
-neg_category.append(neg_env_sent)
-neg_category.append(neg_tuition_sent)
-neg_category.append(neg_canteen_sent)
-
-
-neut_category = []
-
-neut_category.append(neut_secure_sent)
-neut_category.append(neut_service_sent)
-neut_category.append(neut_env_sent)
-neut_category.append(neut_tuition_sent)
-neut_category.append(neut_canteen_sent)
+    print("Total Data Sentiment: " + str(total_sen))
 
 
 
 
 
-total_sen = 0
-
-for something in df['TextDataReview']:
-    total_sen+=1
-
-print("Total Data Sentiment: " + str(total_sen))
+# negative_point = 0
+# Neutral_point = 0
+# positive_point = 0
+#
+# pos_service_sent = 0
+# neg_service_sent =0
+# neut_service_sent = 0
+#
+# pos_tuition_sent = 0
+# neg_tuition_sent = 0
+# neut_tuition_sent = 0
+#
+# pos_secure_sent = 0
+# neg_secure_sent = 0
+# neut_secure_sent = 0
+#
+# pos_env_sent = 0
+# neg_env_sent = 0
+# neut_env_sent = 0
+#
+# pos_canteen_sent = 0
+# neut_canteen_sent = 0
+# neg_canteen_sent = 0
+#
+# newInf = pos_service_sent, pos_tuition_sent+1, pos_secure_sent, pos_env_sent+1
+#
+#
+# for phrase in df['TextDataReview']:
+#     manjiGang = TextBlob(phrase)
+#     poleRate = ["1", "2", "3", "4", "5"]
+#
+#     word = 0
+#     for ratingSession in poleRate:
+#         # Supporting the Pole
+#         if phrase == ratingSession:
+#             # print("Sentiment Point: " + str(ratingCanteen(phrase)))
+#             # print("Sentence: Poll review for canteen => :" + phrase)
+#             # print("Polarity result: " + sentiment_result(ratingCanteen(phrase)))
+#             # print("\n")
+#             cant_sent += 1
+#             if sentiment_result(ratingCanteen(phrase)) == "Positive":
+#                 positive_point += 1
+#                 pos_canteen_sent += 1
+#             if sentiment_result(ratingCanteen(phrase)) == "Negative":
+#                 negative_point += 1
+#                 neg_canteen_sent += 1
+#             if sentiment_result(ratingCanteen(phrase)) == "Neutral":
+#                 Neutral_point += 1
+#                 neut_canteen_sent += 1
+#
+#
+#
+#     # Regular data
+#     if phrase != "1":
+#         if phrase != "2":
+#             if phrase != "3":
+#                 if phrase != "4":
+#                     if phrase != "5":
+#                         # print("Sentiment point:  " + str(manjiGang.sentiment.polarity))
+#                         # print("Sentence :" + phrase)
+#                         # print("Polarity result: " + sentiment_result(manjiGang.sentiment.polarity))
+#                         # print("\n")
+#                         if sentiment_result(manjiGang.sentiment.polarity) == "Positive":
+#                             positive_point += 1
+#                             # pos neg neu of each cate guidance
+#                             if isService(phrase) == True:
+#                                 pos_service_sent += 1
+#
+#                             elif isTuition(phrase) == True:
+#                                 pos_tuition_sent += 1
+#
+#                             elif isSecurity(phrase) == True:
+#                                 pos_secure_sent += 1
+#
+#                             elif isEnvironment(phrase) == True:
+#                                 pos_env_sent += 1
+#
+#                         if sentiment_result(manjiGang.sentiment.polarity) == "Negative":
+#                             negative_point += 1
+#                             if isService(phrase) == True:
+#                                 neg_service_sent += 1
+#
+#                             elif isTuition(phrase) == True:
+#                                 neg_tuition_sent += 1
+#
+#                             elif isSecurity(phrase) == True:
+#                                 neg_secure_sent += 1
+#
+#                             elif isEnvironment(phrase) == True:
+#                                 neg_env_sent += 1
+#
+#                         if sentiment_result(manjiGang.sentiment.polarity) == "Neutral":
+#                             Neutral_point += 1
+#                             if isService(phrase) == True:
+#                                 neut_service_sent += 1
+#                             elif isTuition(phrase) == True:
+#                                 neut_tuition_sent += 1
+#                             elif isSecurity(phrase) == True:
+#                                 neut_secure_sent += 1
+#                             elif isEnvironment(phrase) == True:
+#                                 neut_env_sent += 1
+#
+#                         if isService(phrase) == True:
+#                             service_sent += 1
+#
+#                         if isTuition(phrase) == True:
+#                             tuition_sent += 1
+#
+#                         if isSecurity(phrase) == True:
+#                             secure_sent += 1
+#
+#                         if isEnvironment(phrase) == True:
+#                             env_sent += 1
+#
+# newEgg =[]
+# print("Service ========> " + str(service_sent))
+# print("tuition ========> " + str(tuition_sent))
+# print("Security ========> " + str(secure_sent))
+# print("Environment ========> " + str(env_sent))
+# print("canteen ========> " + str(cant_sent))
+#
+# # serviceFullInfo()
+# # tuitionFullInfo()
+# # envFullInfo()
+# # securityFullInfo()
+# pos_category= []
+#
+# pos_category.append(pos_secure_sent)
+# pos_category.append(pos_service_sent)
+# pos_category.append(pos_env_sent+1)
+# pos_category.append(pos_tuition_sent+1)
+# pos_category.append(pos_canteen_sent)
+#
+# neg_category = []
+#
+# neg_category.append(neg_secure_sent)
+# neg_category.append(neg_service_sent)
+# neg_category.append(neg_env_sent)
+# neg_category.append(neg_tuition_sent)
+# neg_category.append(neg_canteen_sent)
+#
+#
+# neut_category = []
+#
+# neut_category.append(neut_secure_sent)
+# neut_category.append(neut_service_sent)
+# neut_category.append(neut_env_sent)
+# neut_category.append(neut_tuition_sent)
+# neut_category.append(neut_canteen_sent)
+#
+#
+#
+#
+#
+# total_sen = 0
+#
+# for something in df['TextDataReview']:
+#     total_sen+=1
+#
+# print("Total Data Sentiment: " + str(total_sen))
 
 # for phrase in df['TextDataReview']:
 #     yeet = TextBlob(phrase)
@@ -360,6 +522,23 @@ def hello():
 @app.route('/howItWork',methods = ["GET"])
 def howItWork():
     return render_template('spart.html')
+
+@app.route("/uploadingPage", methods=['POST'])
+def uploadingPage():
+    if 'csv' in request.files:
+        csvFile = request.files['csv']
+        duckyHead = pd.read_csv(csvFile)
+
+
+
+        return duckyHead
+
+@app.route("/tested", methods= ["GET"])
+def testingy():
+
+    weed = df['TextDataReview'].tolist()
+
+    return render_template('uploadingPage.html', weed=weed)
 
 
 if __name__ == '__main__':
