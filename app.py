@@ -40,9 +40,9 @@ def create_word_features(words):
 #         token = re.sub("(@[A-Za-z0-9_]+)","", token)
 
 def balancingScore(value, object):
-    badSentiment = ["expensive", "dirty", "pricey", "issue"]
+    reverseSentence = ["but", "however", "on the other hand", "nevertheless", "despite"]
 
-    for negativeSentiment in badSentiment:
+    for negativeSentiment in reverseSentence:
         for verbinG in object.words:#tokenizing
             if negativeSentiment == verbinG:
                 value = value - 0.05
@@ -97,7 +97,8 @@ def ratingCanteen(numbs):
 
 def isEnvironment(facilitiy):
 
-    facilBoxy = ["hall", "library", "classroom", "clean", "dirty", "atmosphere", "air", "hot", "cold", "conference", "toilet", "garden", "scenary", "computerhall", "environment"]
+    facilBoxy = ["hall", "library", "classroom", "clean", "dirty", "atmosphere", "air", "hot", "cold",
+                 "conference", "toilet", "garden", "scenary", "computerhall", "environment"]
     for sameSame in facilBoxy:
         if sameSame in facilitiy.lower():
             return True
@@ -132,6 +133,9 @@ def sentiment_result(value):
     if value > 0:
         return "Positive"
 
+
+
+
 # def serviceFullInfo():
 #     print("Service positive: " + str(pos_service_sent))
 #     print("Service Negaative: " + str(neg_service_sent))
@@ -154,7 +158,30 @@ def sentiment_result(value):
 #     print("Environment Neutral: " + str(neut_env_sent))
 #
 
-def algo():
+# stop_modify = {'were', 'from', 'just', 'who', 'tuition', 'security', 'think', 'what', 'further', "shouldn't", "needn't", 'each', 've', 'which', "you'll", "hasn't", 'below', 'out', 'shan', 'couldn', 'was', 'how', 'once', 'm', 'he', 'll', 'where', 'won', 'them', 'a', 'own', "hadn't", 'if', 'by', 'they', 'or', 'your', "you're", 'it', 's', 'after', 'in', 't', 'themselves', 'itself', 'few', 'now', 'before', 'do', 'until', 'but', "it's", 'haven', "doesn't", 'y', 'her', "isn't", "weren't", 'be', 'our', 'to', "she's", "you've", 'as', 'she', 'ourselves', 'there', 'then', 'ours', 'shouldn', 'yours', 'with', 'my', 'because', 'any', 'been', 'needn', 'while', 'hers', 'yourself', 'ma', 'their', 'mustn', 'other', "won't", 'only', 'not', 'that', 'have', 'herself', "didn't", 'under', "shan't", 'had', 'o', "haven't", 'such', 'above', 'same', 'between', 'mightn', 'd', 're', 'hasn', 'him', "mustn't", 'than', 'this', 'over', 'whom', 'myself', 'more', 'doing', 'against', 'during', 'down', 'both', "should've", 'can', "couldn't", 'don', 'an', 'me', "don't", 'through', 'isn', 'very', 'ain', 'being', 'having', 'most', 'didn', 'is', 'when', "aren't", 'no', 'are', 'some', 'at', 'into', 'on', 'again', 'i', "wasn't", 'yourselves', 'theirs', 'aren', 'weren', 'has', 'too', 'about', 'those', 'nor', "you'd", 'of', 'will', 'we', 'does', 'so', 'these', 'off', 'why', 'wouldn', "mightn't", 'up', 'his', 'did', 'its', 'am', "that'll", 'himself', 'you', 'the', 'wasn', 'all', 'doesn', 'hadn', 'should', "wouldn't", 'and', 'here', 'for'}
+#
+# word_COUNT = []
+#
+#
+#
+# frequent_word_key= []
+# frequent_word_value = []
+# all_words = Counter(' '.join(df['TextDataReview']).lower().split()).most_common(25)
+# for k, v in all_words:
+#     if k not in stop_modify:
+#         frequent_word_key.append(k)
+#         frequent_word_value.append(v)
+#         # print(k, v)
+#
+# fwk = frequent_word_key[:5]
+# fwv = frequent_word_value[:5]
+
+def algo(duckyhead):
+
+    df = duckyhead
+    if df is None:
+        df = pd.read_csv(f'https://docs.google.com/spreadsheets/d/{sheetid}/export?format=csv')
+
     secure_sent = 0
     tuition_sent = 0
     cant_sent = 0
@@ -186,7 +213,7 @@ def algo():
 
     newInf = pos_service_sent, pos_tuition_sent + 1, pos_secure_sent, pos_env_sent + 1
 
-    for phrase in df['TextDataReview']:
+    for phrase in df['TextDataReview']: #df['TextDataReview']
         manjiGang = TextBlob(phrase)
         poleRate = ["1", "2", "3", "4", "5"]
 
@@ -278,6 +305,36 @@ def algo():
     print("Environment ========> " + str(env_sent))
     print("canteen ========> " + str(cant_sent))
 
+    stop_modify = {'were', 'from', 'just', 'who', 'tuition', 'security', 'think', 'what', 'further', "shouldn't",
+                   "needn't", 'each', 've', 'which', "you'll", "hasn't", 'below', 'out', 'shan', 'couldn', 'was', 'how',
+                   'once', 'm', 'he', 'll', 'where', 'won', 'them', 'a', 'own', "hadn't", 'if', 'by', 'they', 'or',
+                   'your', "you're", 'it', 's', 'after', 'in', 't', 'themselves', 'itself', 'few', 'now', 'before',
+                   'do', 'until', 'but', "it's", 'haven', "doesn't", 'y', 'her', "isn't", "weren't", 'be', 'our', 'to',
+                   "she's", "you've", 'as', 'she', 'ourselves', 'there', 'then', 'ours', 'shouldn', 'yours', 'with',
+                   'my', 'because', 'any', 'been', 'needn', 'while', 'hers', 'yourself', 'ma', 'their', 'mustn',
+                   'other', "won't", 'only', 'not', 'that', 'have', 'herself', "didn't", 'under', "shan't", 'had', 'o',
+                   "haven't", 'such', 'above', 'same', 'between', 'mightn', 'd', 're', 'hasn', 'him', "mustn't", 'than',
+                   'this', 'over', 'whom', 'myself', 'more', 'doing', 'against', 'during', 'down', 'both', "should've",
+                   'can', "couldn't", 'don', 'an', 'me', "don't", 'through', 'isn', 'very', 'ain', 'being', 'having',
+                   'most', 'didn', 'is', 'when', "aren't", 'no', 'are', 'some', 'at', 'into', 'on', 'again', 'i',
+                   "wasn't", 'yourselves', 'theirs', 'aren', 'weren', 'has', 'too', 'about', 'those', 'nor', "you'd",
+                   'of', 'will', 'we', 'does', 'so', 'these', 'off', 'why', 'wouldn', "mightn't", 'up', 'his', 'did',
+                   'its', 'am', "that'll", 'himself', 'you', 'the', 'wasn', 'all', 'doesn', 'hadn', 'should',
+                   "wouldn't", 'and', 'here', 'for'}
+
+    word_COUNT = []
+
+    frequent_word_key = []
+    frequent_word_value = []
+    all_words = Counter(' '.join(df['TextDataReview']).lower().split()).most_common(25)
+    for k, v in all_words:
+        if k not in stop_modify:
+            frequent_word_key.append(k)
+            frequent_word_value.append(v)
+            # print(k, v)
+
+    fwk = frequent_word_key[:5]
+    fwv = frequent_word_value[:5]
     # serviceFullInfo()
     # tuitionFullInfo()
     # envFullInfo()
@@ -312,9 +369,47 @@ def algo():
         total_sen += 1
 
     print("Total Data Sentiment: " + str(total_sen))
+    return {
+        'secure_sent' : secure_sent,
+        'tuition_sent' : tuition_sent,
+        'cant_sent' : cant_sent,
+        'env_sent' : env_sent,
+        'service_sent' : service_sent,
+
+        'negative_point' : negative_point,
+        'Neutral_point' : Neutral_point,
+        'positive_point' : positive_point,
+
+        'pos_service_sent' : pos_service_sent,
+        'neg_service_sent' : neg_service_sent,
+        'neut_service_sent' : neut_service_sent,
+
+        'pos_tuition_sent' : pos_tuition_sent,
+        'neg_tuition_sent' : neg_tuition_sent,
+        'neut_tuition_sent' : neut_tuition_sent,
+
+        'pos_secure_sent' : pos_secure_sent,
+        'neg_secure_sent' : neg_secure_sent,
+        'neut_secure_sent' : neut_secure_sent,
+
+        'pos_env_sent':pos_env_sent,
+        'neg_env_sent':neg_env_sent,
+        'neut_env_sent':neut_env_sent,
+
+        'pos_canteen_sent':pos_canteen_sent,
+        'neut_canteen_sent':neut_canteen_sent,
+        'neg_canteen_sent':neg_canteen_sent,
+
+        'pos_category':pos_category,
+        'neg_category': neg_category,
+        'neut_category': neut_category,
 
 
+        'total_sen':total_sen,
+        'fwk':fwk,
+        'fwv':fwv,
 
+    }
 
 
 # negative_point = 0
@@ -484,23 +579,7 @@ def algo():
 #         print(phrase + ' = '+ sentiment_result(yeet.sentiment.polarity) )
 
 
-stop_modify = {'were', 'from', 'just', 'who', 'tuition', 'security', 'think', 'what', 'further', "shouldn't", "needn't", 'each', 've', 'which', "you'll", "hasn't", 'below', 'out', 'shan', 'couldn', 'was', 'how', 'once', 'm', 'he', 'll', 'where', 'won', 'them', 'a', 'own', "hadn't", 'if', 'by', 'they', 'or', 'your', "you're", 'it', 's', 'after', 'in', 't', 'themselves', 'itself', 'few', 'now', 'before', 'do', 'until', 'but', "it's", 'haven', "doesn't", 'y', 'her', "isn't", "weren't", 'be', 'our', 'to', "she's", "you've", 'as', 'she', 'ourselves', 'there', 'then', 'ours', 'shouldn', 'yours', 'with', 'my', 'because', 'any', 'been', 'needn', 'while', 'hers', 'yourself', 'ma', 'their', 'mustn', 'other', "won't", 'only', 'not', 'that', 'have', 'herself', "didn't", 'under', "shan't", 'had', 'o', "haven't", 'such', 'above', 'same', 'between', 'mightn', 'd', 're', 'hasn', 'him', "mustn't", 'than', 'this', 'over', 'whom', 'myself', 'more', 'doing', 'against', 'during', 'down', 'both', "should've", 'can', "couldn't", 'don', 'an', 'me', "don't", 'through', 'isn', 'very', 'ain', 'being', 'having', 'most', 'didn', 'is', 'when', "aren't", 'no', 'are', 'some', 'at', 'into', 'on', 'again', 'i', "wasn't", 'yourselves', 'theirs', 'aren', 'weren', 'has', 'too', 'about', 'those', 'nor', "you'd", 'of', 'will', 'we', 'does', 'so', 'these', 'off', 'why', 'wouldn', "mightn't", 'up', 'his', 'did', 'its', 'am', "that'll", 'himself', 'you', 'the', 'wasn', 'all', 'doesn', 'hadn', 'should', "wouldn't", 'and', 'here', 'for'}
 
-word_COUNT = []
-
-
-
-frequent_word_key= []
-frequent_word_value = []
-all_words = Counter(' '.join(df['TextDataReview']).lower().split()).most_common(25)
-for k, v in all_words:
-    if k not in stop_modify:
-        frequent_word_key.append(k)
-        frequent_word_value.append(v)
-        # print(k, v)
-
-fwk = frequent_word_key[:5]
-fwv = frequent_word_value[:5]
 
 # for word in all_words:
 #     if word not in superior:
@@ -509,29 +588,61 @@ fwv = frequent_word_value[:5]
 
 # print(all_words[9:10])
 
+#
+# Example = ["Toilet smells bad.",
+#            "The receptionist is friendly and very helpful toward finding information about the school for us new students.",
+#
+#            "Not my style I don't recommend it"]
+#
+#
+# for phraseExample in Example:
+#     dataExample = TextBlob(phraseExample)
+#
+#     print("Sentence: " + str(dataExample) )
+#     print("Sentiment Score: " + str(dataExample.sentiment.polarity))
+#     print("Result: " + sentiment_result(dataExample.sentiment.polarity))
+#     print("")
 
 
-@app.route("/")
+
+
+
+
+
+@app.route("/",methods = ["GET"])
 def hello():
-    return render_template('index.html', total_sen=total_sen,
-                           neg_p=negative_point, neut_p=Neutral_point, pos_category=pos_category,
-                           neg_category=neg_category,neut_category=neut_category,
-                           positive_point=positive_point, negative_point=negative_point, Neutral_point=Neutral_point,
-                           fwk=fwk, fwv=fwv)
+
+    dataAl=algo(None)
+
+
+
+
+    return render_template('index.html', total_sen=dataAl['total_sen'],
+                           neg_p=dataAl['negative_point'], neut_p=dataAl['Neutral_point'], pos_category=dataAl['pos_category'],
+                           neg_category=dataAl['neg_category'],neut_category=dataAl['neut_category'],
+                           positive_point=dataAl['positive_point'], negative_point=dataAl['negative_point'], Neutral_point=dataAl['Neutral_point'],
+                           fwk=dataAl['fwk'], fwv=dataAl['fwv'])
 
 @app.route('/howItWork',methods = ["GET"])
 def howItWork():
     return render_template('spart.html')
 
 @app.route("/uploadingPage", methods=['POST'])
+
 def uploadingPage():
     if 'csv' in request.files:
         csvFile = request.files['csv']
         duckyHead = pd.read_csv(csvFile)
+        dataAl = algo(duckyHead)
+        print(dataAl)
 
-
-
-        return duckyHead
+        return render_template('index.html', total_sen=dataAl['total_sen'],
+                               neg_p=dataAl['negative_point'], neut_p=dataAl['Neutral_point'],
+                               pos_category=dataAl['pos_category'],
+                               neg_category=dataAl['neg_category'], neut_category=dataAl['neut_category'],
+                               positive_point=dataAl['positive_point'], negative_point=dataAl['negative_point'],
+                               Neutral_point=dataAl['Neutral_point'],
+                               fwk=dataAl['fwk'], fwv=dataAl['fwv'])
 
 @app.route("/tested", methods= ["GET"])
 def testingy():
