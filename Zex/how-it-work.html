@@ -5,16 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{{url_for('static', filename='body.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='header.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='how-it-work.css')}}">
-    <link rel="icon" href="{{url_for('static', filename='paragon.png')}}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/how-it-work.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/body.css">
 
-    <title>Homepage Sentiment Analysis</title>
+    <title>How it work</title>
 
 </head>
 <body>
@@ -24,8 +20,8 @@
   <div class="header">
     <div class="row">
       <div class="text-center">
-        <img class="img" src="{{url_for('static', filename='paragon-logo.png')}}" alt="">
-        <a href="/" class="logo">PIU Sentimental Analysis</a>
+        <img class="img" src="../img/paragon-logo.png" alt="">
+        <a href="#default" class="logo">PIU Sentimental Analysis</a>
       </div>
       <div class="text-center">
         <div class="fyp-txt header-right">CS402 - Final Year Project</div>
@@ -35,22 +31,27 @@
 
   <!--  -->
 
-  <div class="container-back-home"><a href="/sample" class="back-home"> Sample </a></div>
+  <div class="container-back-home"><a href="#" class="back-home"> Back to homepage </a></div>
  
   <div class="whole-container-howItWorks">
 
-    <div class="howItworks-Header-txt">How our software works</div>
-              
-              <form action="/uploadingPage" method="post" enctype="multipart/form-data">
-                <div class="custom-file mb-3">
-                  <input type="file" class="custom-file-input" id="customFile" name="filecsv" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-                  <label class="custom-file-label" for="customFile">Choose file</label>
-                </div>
-              
-                <div class="mt-3">
-                  <input type="submit" class="btn btn-primary" value="Upload"/>
-                </div>
-              </form>
+    <div class="howItworks-Header-txt">User Manual</div>
+
+    <div class="container-center" style="margin-bottom: 0px;">
+
+      <!-- actual upload which is hidden -->
+      <input type="file" id="actual-btn" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" hidden/>
+
+      <!-- our custom upload button -->
+      <label for="actual-btn">Choose File</label>
+
+      <!-- name of file chosen -->
+      <span id="file-chosen">No file chosen</span>
+
+      <input type="submit" id="submit-btn">
+
+    </div>
+
     <!-- User manual txt -->
 
     <div class="container-howItWorks-manual">
@@ -59,7 +60,7 @@
       <div class="container-howItWorks-txt-manual">2. The header in the column of the .csv file as shown below in the highlight needs to be with the text of  “TextDataReview” 
                                                   and the data is stored below that header in order to make 
                                                   our software recognize the format that we have set.  </div>
-      <img src="{{url_for('static', filename='csvFileStructure.png')}}" alt="" class="img-csv-responsive">
+      <img src="../img/csvFileStructure.png" alt="" class="img-csv-responsive">
       <div class="container-howItWorks-txt-manual">3. There is an button that says choose file, then you have to click on that button and find any .csv file from your device that has the same format as we have mentioned in (2) point.</div>
       <div class="container-howItWorks-txt-manual">4. After you have uploaded your file click on the “Back to homepage” button, then the website will redirect you to the homepage and you can see the result
                                                     from our graphs which are located at the bottom of our homepage.</div>
@@ -69,27 +70,28 @@
     </div>
 
     <!--  -->
+    
+    <div class="howItworks-Header-txt">How our system works</div>
 
-<div>
     <div class="container-howItWorks">
       <div class="container-howItWorks-txt">1. First we were collecting data from people using google survey <i class="arrow right"></i> </div>
-      <img class="img-responsive" src="{{url_for('static', filename='Google_Forms_logo_(2014-2020).svg.png')}}" alt="">
+      <img class="img-responsive" src="../img/Google_Forms_logo_(2014-2020).svg.png" alt="">
     </div>
 
     <div class="container-howItWorks">
       <div class="container-howItWorks-txt">2. From there we stores those data into the google spread sheet <i class="arrow right"></i></div>
-      <img class="img-responsive" src="{{url_for('static', filename='Google_Sheets_logo_(2014-2020).svg.png')}}" alt=""></a>
+      <img class="img-responsive" src="../img/Google_Sheets_logo_(2014-2020).svg.png" alt=""></a>
     </div>
 
     <div class="container-howItWorks">
       <div class="container-howItWorks-txt">3. We query each data at a time from google spread sheet using our algorithm to evaluate the sentimental level of the data and convert it into a human readable
         form.<br>  Using the algorithm to determine which one of the 5 facility that the data is belong to. <i class="arrow right"></i></div>
-      <a href="#"><img class="img-responsive" src="{{url_for('static', filename='software.png')}}" alt=""></a>
+      <a href="#"><img class="img-responsive" src="../img/Google_Forms_logo_(2014-2020).svg.png" alt=""></a>
     </div>
 
     <div class="container-howItWorks">
       <div class="container-howItWorks-txt">4. Finally we categorized all the data and display as info-graphic on the website <i class="arrow right"></i> </div>
-      <img class="img-responsive" src="{{url_for('static', filename='weblogo.png')}}" alt="">
+      <img class="img-responsive" src="../img/Google_Forms_logo_(2014-2020).svg.png" alt="">
     </div>
   </div>
 
@@ -101,13 +103,5 @@
     </div>
   </div>
 
-  <script>
-    // Add the following code if you want the name of the file appear on select
-    $(".custom-file-input").on("change", function() {
-      var fileName = $(this).val().split("\\").pop();
-      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
-    </script>
-    
 </body>
 </html>
