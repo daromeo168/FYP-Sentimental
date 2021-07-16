@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='header.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='body.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='error-handles.css')}}">
+
+    <title>Error</title>
+</head>
+<body>
+    <!-- Header -->
+
+    <div class="header">
+        <div class="row">
+        <div class="text-center">
+            <img class="img" src="{{url_for('static', filename='paragon-logo.png')}}" alt="">
+            <a href="/" class="logo">PIU Sentimental Analysis</a>
+        </div>
+        <div class="text-center">
+            <div class="fyp-txt header-right">CS402 - Final Year Project</div>
+        </div>
+        </div>
+    </div>
+  <!--  -->
+
+    <div class="container-error">
+        <div class="error-txt">Error!</div>
+        <div class="error-txt">csv file must contain TextReviewData on the header</div>
+    </div>
+
+  <!-- Footer -->
+    <div class="footer-container" >
+        <div class="container-footer-row">
+        <div>All rights reserved. Copyright © 2020 - 2021 Porchhay Ngov & Sidaro Keo</div>
+        </div>
+    </div>
+</body>
+</html>
