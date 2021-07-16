@@ -403,8 +403,8 @@ def algo(duckyhead):
 
     pos_category.append(pos_secure_sent)
     pos_category.append(pos_service_sent)
-    pos_category.append(pos_env_sent + 1)
-    pos_category.append(pos_tuition_sent + 1)
+    pos_category.append(pos_env_sent )
+    pos_category.append(pos_tuition_sent )
     pos_category.append(pos_canteen_sent)
 
     neg_category = []
@@ -504,8 +504,8 @@ def uploadingPage():
 
 
     
-    if 'filecsv' in request.files:
-        csvFile = request.files['filecsv']
+    if 'csv' in request.files:
+        csvFile = request.files['csv']
         print(csvFile)
         duckyHead = pd.read_csv(csvFile)
         if "TextDataReview" in duckyHead.head().to_string():
